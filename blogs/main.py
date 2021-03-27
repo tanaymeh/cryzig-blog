@@ -17,5 +17,9 @@ def get_db():
 
 # Routes
 @app.post('/blog')
-def create(request: schemas.BlogData, db: Session = Depends(get_db)):
-    return db
+def create(req: schemas.BlogData, db: Session = Depends(get_db)):
+    new_blog = models.Model(title=req.title, body=req.body)
+    db.add(new_blog)
+    db.commit()
+    db.refresh(new_blog)
+    return new_blog
