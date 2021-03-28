@@ -1,8 +1,8 @@
 import random
 import string
 import json
-import os
-from . import schemas
+import os 
+import schemas
 
 class Utils:
     def createUser(userData: dict):
@@ -17,7 +17,7 @@ class Utils:
         # Create the file and add the data into it.
         fileName = Utils.generateANString()
         fileName = f"{fileName}.json"
-        with open(f"pstorage/udata/{fileName}", 'w') as f:
+        with open(f"data/{fileName}", 'w') as f:
             json.dump(userData, f)
 
         # Add the entry into the registry
@@ -30,11 +30,11 @@ class Utils:
         """
         Adds a userid and it's corresponding data filename in the registry
         """
-        if not os.path.exists('pstorage/udata/registry.json'):
-            f = open('pstorage/udata/registry.json', 'w+')
+        if not os.path.exists('data/registry.json'):
+            f = open('data/registry.json', 'w+')
             json.dump(data, f)                         
         else:
-            with open('pstorage/udata/registry.json', 'r+') as fl:
+            with open('data/registry.json', 'r+') as fl:
                 newData = json.load(fl)
                 newData.update(data)
                 fl.seek(0)
@@ -45,7 +45,7 @@ class Utils:
         Checks if a 'userid: filename' pair exists in the registry.
         """
         try:
-            with open('pstorage/udata/registry.json', 'r+') as fl:
+            with open('data/registry.json', 'r+') as fl:
                 file = json.load(fl)
                 # print(file)
                 if userid in file:

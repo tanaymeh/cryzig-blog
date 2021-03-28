@@ -1,6 +1,5 @@
 fastapi
 uvicorn
 pydantic
-sqlalchemy
 aiofiles
 jinja2
