@@ -56,6 +56,29 @@ class Utils:
         
         return False
     
+    def getAllUsers(registryPath: str):
+        """Return a list of tuple, Every tuple having a single users details
+
+        Args:
+            registryPath (str): Path where the registry is located
+        """
+        # First check if registry exists or not
+        if not os.path.exists(registryPath):
+            return -1
+        
+        allUsers = []
+        with open(registryPath, 'r') as registry:
+            registry = json.load(registry)
+        
+        for user in registry.items():
+            with open(os.path.join("data", user[1]), 'r') as userfile:
+                userfile = json.load(userfile)
+            currentUserData = list(userfile.values())
+            allUsers.append(currentUserData)
+        
+        print(allUsers)
+        return allUsers
+    
     def convertModeltoJSON(userModelObject: schemas.UserModel):
         """Takes a UserModel type object and return a dictionary of the data
 
