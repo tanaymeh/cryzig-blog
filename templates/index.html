@@ -5,11 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cryzig | Home Page</title>
-    <link rel="stylesheet" href="css/skeleton.css">
-    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="{{ url_for('static', path='/barebones.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='/normalize.css') }}">
     <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
 </head>
 <body>
-    <h1 align="center" style="font-family: Raleway;">Welcome, {{ name }}!</h1>
+    <h1 align="center">Welcome to Cryzig!</h1>
+    <h3 align="center">An blogging platform created in Python using FastAPI</h3>
+    <br>
+    <h5 align="center"><a class="button button-primary" href="/blogs">All Blogs</a> <a class="button button-primary" href="/newblog">Create a Blog</a> <a class="button button-primary" href="/delete">Delete a Blog</a></h5>
+    <br>
+    <h4 align="center">Coded by <a href="https://heytanay.github.io">Tanay Mehta</a> with ❤</h4>
 </body>
 </html>

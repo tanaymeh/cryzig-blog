@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
-class UserModel(BaseModel):
-    userid: str
-    name: str
-    age: int
-    gender: str
+class BlogModel(BaseModel):
+    authid: int
+    blogTitle: str
+    author: str
+    content: str
