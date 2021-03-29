@@ -21,6 +21,7 @@ async def create_blog(req: Request):
 
 @app.post('/createblog')
 async def create_blog(
+        req: Request,
         authorName: str=Form(...),
         blogTitle: str=Form(...),
         blogContent: str=Form(...)
@@ -34,7 +35,7 @@ async def create_blog(
     
     blogData = utils.Utils.createUser(req)
     
-    return {'data': f'Added Blog: {req.authid} to the registry with filename: {blogData}'}
+    # return {'data': f'Added Blog: {req.authid} to the registry with filename: {blogData}'}
 
 @app.get('/blogs')
 async def show_blogs(req: Request):

@@ -73,9 +73,17 @@ class Utils:
                 userfile = json.load(userfile)
             currentUserData = list(userfile.values())
             allUsers.append(currentUserData)
-        
-        print(allUsers)
         return allUsers
+    
+    def hashTitle(title: str):
+        """Cleans a title string and returns it's hashed version to be used as an id
+
+        Args:
+            title (str): Title of a blog
+        """
+        title = title.lower()
+        # hash()
+        
     
     def convertModeltoJSON(modelObject: schemas.BlogModel):
         """Takes a BlogModel type object and return a dictionary of the data
