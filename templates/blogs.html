@@ -10,11 +10,10 @@
     <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
 </head>
 <body>
-    <h1 align="center" style="font-family: Raleway;">Below is the list of all of our users.</h1>
-    
-    <ul id='users'>
+    <h1 align="center" style="font-family: Raleway;">Below is the list of all the blogs.</h1>
+    <ul id='users' align='center'>
         {% for user in all_users %}
-            <li style="font-family: Raleway;">{{user}}</li>
+            <li style="font-family: Raleway;">{{ user }}</li>
         {% endfor %}
     </ul>
 </body>

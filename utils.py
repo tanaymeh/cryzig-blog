@@ -87,10 +87,10 @@ class Utils:
             dict: Dictionary form of blog model object
         """
         modelCache = {}
-        modelCache['authid'] = modelObject['authid']
-        modelCache['blogTitle'] = modelObject['blogTitle']
-        modelCache['author'] = modelObject['author']
-        modelCache['content'] = modelObject['content']
+        modelCache['authid'] = modelObject.authid
+        modelCache['blogTitle'] = modelObject.blogTitle
+        modelCache['author'] = modelObject.author
+        modelCache['content'] = modelObject.content
         
         return modelCache
     

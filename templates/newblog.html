@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cryzig | Create a New Blog</title>
+        <link rel="stylesheet" href="{{ url_for('static', path='/barebones.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', path='/normalize.css') }}">
+        <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+    </head>
+    <body align="center" style="max-width: 500px;margin: auto">
+        <h1>Create a new Blog</h1>
+        Fill the form below to create a new blog
+        <hr>
+        <form action='/createblog' method='post'>
+            <div class="row">
+              <div class="six columns">
+                <label for="authorName">Author Name</label>
+                <input class="u-full-width" type="text" required placeholder="John Doe" id="authorName">
+              </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="six columns">
+                  <label for="blogTitle">Blog Title</label>
+                  <input class="u-full-width" type="text" required placeholder="A brief introduction to General Relativity" id="blogTitle">
+                </div>
+            </div>
+            <br>
+            <label for="blogContent">Content</label>
+            <textarea class="u-full-width" required placeholder="Lore ipsum dopler sit amet..." id="blogContent"></textarea>
+            <br><br>
+            <input class="button-primary" type="submit" value="Submit">
+          </form>
+    </body>
+</html>

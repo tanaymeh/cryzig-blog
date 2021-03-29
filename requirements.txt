@@ -3,3 +3,4 @@ uvicorn
 pydantic
 aiofiles
 jinja2
+python-multipart

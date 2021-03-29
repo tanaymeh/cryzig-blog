@@ -1,5 +1,6 @@
 from typing import Optional
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Form
+from fastapi import templating
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
@@ -9,20 +10,31 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory='templates/')
 
-@app.post('/createblog')
-async def create_blog(req: schemas.BlogModel):
-    # First check if the blog exists in the registry
-    userExists = utils.Utils.checkRegistry(req.userid)
-    if userExists:
-        return {'data': f'USER (id: {req.authid}, name: {req.author}) ALREADY EXISTS'}
-    
-    userFileName = utils.Utils.createUser(req)
-    
-    return {'data': f'Added User: {req.authid} to the registry with filename: {userFileName}'}
-
 @app.get('/')
 async def home(req: Request, name: Optional[str]=None):
     return templates.TemplateResponse('index.html', context={'request': req})
+
+@app.get('/createblog')
+async def create_blog(req: Request):
+    return templates.TemplateResponse('newblog.html',
+                                context={'request': req})
+
+@app.post('/createblog')
+async def create_blog(
+        authorName: str=Form(...),
+        blogTitle: str=Form(...),
+        blogContent: str=Form(...)
+    ):
+    print(authorName, blogTitle, blogContent)
+    # return
+    # First check if the blog exists in the registry
+    blogExists = utils.Utils.checkRegistry(str(req.authid))
+    if blogExists:
+        return -1
+    
+    blogData = utils.Utils.createUser(req)
+    
+    return {'data': f'Added Blog: {req.authid} to the registry with filename: {blogData}'}
 
 @app.get('/blogs')
 async def show_blogs(req: Request):
@@ -41,15 +53,6 @@ async def show_blogs(req: Request):
     return templates.TemplateResponse('blogs.html', 
                                       context={'request': req, 'all_users': blogTitles}
                                     )
-
-@app.get('/newblog')
-async def new_blog_front(req: Request):
-    """Front End that will have a form to create a new blog
-
-    Args:
-        req (Request): Generic request object
-    """
-    pass
 
 @app.get('/delete')
 async def delete_blog_front(req: Request):
