@@ -1,6 +1,6 @@
 # Cryzig Blog
 
-Welcome to Cryzig! It's a simple blogging platform that I'm making while learning FastAPI. It's written in Pure Python 3.6 and it uses Barebones.css for front-end.
+Welcome to Cryzig! This is a simple blogging platform that I'm making while learning FastAPI. It's written in Pure Python 3.6 and it uses Barebones.css for front-end.
 
 Just like all matters of life, it is a work-in-progress. Currently, I have made it use Local Persistent Storage, which means that any blog that I make using this platform will be stored in form of `.json` file in the `data/` folder.
 
