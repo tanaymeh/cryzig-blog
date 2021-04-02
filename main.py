@@ -65,8 +65,8 @@ async def show_blogs(req: Request):
                                     )
 
 
-@app.get('/delete')
-async def delete_blog_front(req: Request):
+@app.delete('/delete/')
+async def delete_blog(req: Request):
     """Front End that will have a form to delete an existing blog
 
     Args:
