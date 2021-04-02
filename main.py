@@ -1,41 +1,43 @@
 from typing import Optional
+
 from fastapi import FastAPI, Request, Form
-from fastapi import templating
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-import schemas, utils
+import utils
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory='templates/')
 
+
 @app.get('/')
-async def home(req: Request, name: Optional[str]=None):
+async def home(req: Request):
     return templates.TemplateResponse('index.html', context={'request': req})
+
 
 @app.get('/createblog')
 async def create_blog(req: Request):
     return templates.TemplateResponse('newblog.html',
                                 context={'request': req})
 
+
 @app.post('/createblog')
 async def create_blog(
         req: Request,
-        authorName: str=Form(...),
-        blogTitle: str=Form(...),
-        blogContent: str=Form(...)
+        authorName: str = Form(...),
+        blogTitle: str = Form(...),
+        blogContent: str = Form(...)
     ):
-    print(authorName, blogTitle, blogContent)
-    # return
-    # First check if the blog exists in the registry
-    blogExists = utils.Utils.checkRegistry(str(req.authid))
+    # Get the form fields data and convert the blog title to blogid
+    authId = utils.Utils.hashTitle(blogTitle)
+    blogExists = utils.Utils.checkRegistry(authId)
     if blogExists:
         return -1
-    
-    blogData = utils.Utils.createUser(req)
-    
-    # return {'data': f'Added Blog: {req.authid} to the registry with filename: {blogData}'}
+
+    blogDataCache = {'authid': authId, 'blogTitle':blogTitle, 'author':authorName, 'content':blogContent}
+    blogData = utils.Utils.createUser(blogDataCache)
+
 
 @app.get('/blogs')
 async def show_blogs(req: Request):
@@ -54,6 +56,7 @@ async def show_blogs(req: Request):
     return templates.TemplateResponse('blogs.html', 
                                       context={'request': req, 'all_users': blogTitles}
                                     )
+
 
 @app.get('/delete')
 async def delete_blog_front(req: Request):
