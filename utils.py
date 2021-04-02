@@ -75,15 +75,14 @@ class Utils:
             allUsers.append(currentUserData)
         return allUsers
 
-    def hashTitle(title: str):
-        """Cleans a title string and returns it's hashed version to be used as an id
+    def processTitle(title: str):
+        """Cleans a title string to be used as an id
 
         Args:
             title (str): Title of a blog
         """
         title = title.lower()
-        titleHash = abs(hash(title))
-        return titleHash
+        return title
 
 
     def convertModeltoJSON(modelObject: schemas.BlogModel):

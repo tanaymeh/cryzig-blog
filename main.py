@@ -30,14 +30,21 @@ async def create_blog(
         blogContent: str = Form(...)
     ):
     # Get the form fields data and convert the blog title to blogid
-    authId = utils.Utils.hashTitle(blogTitle)
-    blogExists = utils.Utils.checkRegistry(authId)
+    authId = utils.Utils.processTitle(blogTitle)
+    blogExists = utils.Utils.checkRegistry(str(authId))
+    
+    # If the blog already exists, return this.
     if blogExists:
-        return -1
+        return templates.TemplateResponse('newblog.html', context={'request': req, 'failure': True})
 
     blogDataCache = {'authid': authId, 'blogTitle':blogTitle, 'author':authorName, 'content':blogContent}
-    blogData = utils.Utils.createUser(blogDataCache)
-
+    blogDataFileName = utils.Utils.createUser(blogDataCache)
+    
+    # For debugging
+    print(f"Blog with id: {authId}, saved into filename: {blogDataFileName}")
+    
+    return templates.TemplateResponse('blogcreated.html', context={'request': req})
+        
 
 @app.get('/blogs')
 async def show_blogs(req: Request):

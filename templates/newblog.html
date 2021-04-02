@@ -10,28 +10,33 @@
         <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
     </head>
     <body align="center" style="max-width: 500px;margin: auto">
-        <h1>Create a new Blog</h1>
-        Fill the form below to create a new blog
-        <hr>
-        <form action='/createblog' method='post'>
-            <div class="row">
+      {% if failure == True %}
+        <h1 style="color:red;">There was an error creating the blog, please try again!</h1>
+      {% endif %}
+      <h1>Create a new Blog</h1>
+      Fill the form below to create a new blog
+      <hr>
+      <form action='/createblog' method='post'>
+          <div class="row">
+            <div class="six columns">
+              <label for="authorName">Author Name</label>
+              <input class="u-full-width" type="text" required placeholder="John Doe" name="authorName">
+            </div>
+          </div>
+          <br>
+          <div class="row">
               <div class="six columns">
-                <label for="authorName">Author Name</label>
-                <input class="u-full-width" type="text" required placeholder="John Doe" name="authorName">
+                <label for="blogTitle">Blog Title</label>
+                <input class="u-full-width" type="text" required placeholder="A brief introduction to General Relativity" name="blogTitle">
               </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="six columns">
-                  <label for="blogTitle">Blog Title</label>
-                  <input class="u-full-width" type="text" required placeholder="A brief introduction to General Relativity" name="blogTitle">
-                </div>
-            </div>
-            <br>
-            <label for="blogContent">Content</label>
-            <textarea class="u-full-width" required placeholder="Lore ipsum dopler sit amet..." name="blogContent"></textarea>
-            <br><br>
-            <input class="button-primary" type="submit" value="Submit">
-          </form>
+          </div>
+          <br>
+          <label for="blogContent">Content</label>
+          <textarea class="u-full-width" required placeholder="Lore ipsum dopler sit amet..." name="blogContent"></textarea>
+          <br><br>
+          <input class="button-primary" type="submit" value="Submit">
+        </form>
+        <div>
+        </div>
     </body>
 </html>
